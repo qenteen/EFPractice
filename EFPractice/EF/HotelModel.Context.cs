@@ -26,6 +26,6 @@ namespace EF
         }
     
         public virtual DbSet<guest> guest { get; set; }
-        public virtual DbSet<residence> residence { get; set; }
+        public virtual DbSet<hosting> hosting { get; set; }
     }
 }

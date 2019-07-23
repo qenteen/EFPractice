@@ -12,14 +12,13 @@ namespace EF
     using System;
     using System.Collections.Generic;
     
-    public partial class residence
+    public partial class hosting
     {
         public int id { get; set; }
         public int guest_id { get; set; }
         public System.DateTime arrival { get; set; }
         public System.DateTime departure { get; set; }
-        public string status { get; set; }
-        public int room_num { get; set; }
-        public decimal price { get; set; }
+        public int price { get; set; }
+        public int room { get; set; }
     }
 }

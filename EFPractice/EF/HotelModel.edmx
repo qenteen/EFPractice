@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="guest">
           <Key>
             <PropertyRef Name="id" />
@@ -16,7 +16,7 @@
           <Property Name="country" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="address" Type="varchar" MaxLength="250" Nullable="false" />
         </EntityType>
-        <EntityType Name="residence">
+        <EntityType Name="hosting">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -24,16 +24,14 @@
           <Property Name="guest_id" Type="int" Nullable="false" />
           <Property Name="arrival" Type="date" Nullable="false" />
           <Property Name="departure" Type="date" Nullable="false" />
-          <Property Name="status" Type="char" MaxLength="10" Nullable="false" />
-          <Property Name="room_num" Type="int" Nullable="false" />
-          <Property Name="price" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="price" Type="int" Nullable="false" />
+          <Property Name="room" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="HotelModelStoreContainer">
           <EntitySet Name="guest" EntityType="Self.guest" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="residence" EntityType="Self.residence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hosting" EntityType="Self.hosting" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -48,7 +46,11 @@
           <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="residence">
+        <EntityContainer Name="HotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="guest" EntityType="Self.guest" />
+          <EntitySet Name="hosting" EntityType="HotelModel.hosting" />
+        </EntityContainer>
+        <EntityType Name="hosting">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -56,14 +58,9 @@
           <Property Name="guest_id" Type="Int32" Nullable="false" />
           <Property Name="arrival" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="departure" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="status" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="room_num" Type="Int32" Nullable="false" />
-          <Property Name="price" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <Property Name="room" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="HotelEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="guest" EntityType="Self.guest" />
-          <EntitySet Name="residence" EntityType="Self.residence" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -82,16 +79,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="residence">
-            <EntityTypeMapping TypeName="HotelModel.residence">
-              <MappingFragment StoreEntitySet="residence">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="guest_id" ColumnName="guest_id" />
-                <ScalarProperty Name="arrival" ColumnName="arrival" />
-                <ScalarProperty Name="departure" ColumnName="departure" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="room_num" ColumnName="room_num" />
+          <EntitySetMapping Name="hosting">
+            <EntityTypeMapping TypeName="HotelModel.hosting">
+              <MappingFragment StoreEntitySet="hosting">
+                <ScalarProperty Name="room" ColumnName="room" />
                 <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="departure" ColumnName="departure" />
+                <ScalarProperty Name="arrival" ColumnName="arrival" />
+                <ScalarProperty Name="guest_id" ColumnName="guest_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

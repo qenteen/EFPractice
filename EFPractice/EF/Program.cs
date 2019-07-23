@@ -21,22 +21,9 @@ namespace EF
 
         static void Main(string[] args)
         {
-            var loader = new DataLoader();
-            loader.DataPackSaved += LogProgress;
-            loader.LoadDataToServer(@"E:\hosting.xml", 500, 35001);
-
-            //var hotel = new HotelEntities();
-            //var host = new hosting()
-            //{
-            //    //id = 1,
-            //    guest_id = 6,
-            //    arrival = new DateTime(2000, 1, 1),
-            //    departure = new DateTime(2000, 1, 5),
-            //    room = 2001,
-            //    price = 500
-            //};
-            //hotel.hosting.Add(host);
-            //hotel.SaveChanges();
+            var guestLoader = new GuestDataLoader();
+            guestLoader.DataPackSaved += LogProgress;
+            guestLoader.LoadDataToServer(@"E:\people.xml", 500);
 
             Console.WriteLine("Work complete. Press anykey to exit");
             Console.ReadKey();

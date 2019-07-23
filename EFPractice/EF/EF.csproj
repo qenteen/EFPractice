@@ -57,9 +57,11 @@
     <Compile Include="guest.cs">
       <DependentUpon>HotelModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GuestDataLoader.cs" />
     <Compile Include="hosting.cs">
       <DependentUpon>HotelModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="HostingDataLoader.cs" />
     <Compile Include="HotelModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -75,7 +77,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HotelModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="PersonProcessor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
